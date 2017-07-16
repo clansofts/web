@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Router, ActivatedRoute, ParamMap, RouterState  } from '@angular/router';
-
+import * as firebase from 'firebase/app';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -15,7 +17,8 @@ export class AuthComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private route: ActivatedRoute,
-    private router: Router, 
+    private router: Router,
+    public afAuth: AngularFireAuth
   ) { 
     this.form = fb.group({
       username: ['', [Validators.required]],
@@ -34,5 +37,8 @@ export class AuthComponent implements OnInit {
   }
   onSubmit(){
     this.auth.login(this.form.value);
+  }
+  loginSMS(){
+    
   }
 }

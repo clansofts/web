@@ -43,4 +43,7 @@ export class AuthService {
     localStorage.removeItem(this.nameKey);
     this.router.navigate(['/login']);
   }
+  recaptchaVerifier(){
+    
+  }
 }

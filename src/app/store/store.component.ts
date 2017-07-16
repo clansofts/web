@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
-import { Cart } from "../model/cart.model";
+import { CartService } from "./../cart/cart.service";
 import { Product } from "../model/product.model";
 
 @Component({
@@ -15,7 +15,7 @@ export class StoreComponent implements OnInit {
   accessKey='?access_key=MDpmNmJhMzM5ZS01ZGE5LTExZTctOTJhZC0zNzQ1YzhiOWU3OWI6Z1JkVDlENlJhaHRqMlFhVE5lRmI2MVExSVNrRE1BRWJVeExT';
   constructor(
     private http:Http,
-    private cart: Cart,
+    private cart: CartService,
 
 	) {}
 
