@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartComponent } from './../cart/cart.component';
+import { AuthService } from './../auth/auth.service';
 
-//import { AuthService } from './../auth/auth.service';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -10,7 +10,7 @@ import { CartComponent } from './../cart/cart.component';
 export class NavBarComponent implements OnInit {
 
   constructor(
-    //private auth:AuthService
+    private auth:AuthService
   ) { }
 
   ngOnInit() {

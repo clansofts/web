@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  baseUrl = 'http://localhost:3000';
+  baseUrl = 'http://localhost:3000/oauth';
   nameKey = 'name';
   tokenKey = 'token';
   constructor(
@@ -31,7 +31,7 @@ export class AuthService {
           return;
         localStorage.setItem(this.tokenKey, authResponse.token)
         localStorage.setItem(this.nameKey, authResponse.firstName)
-        this.router.navigate(['/messages']);
+        this.router.navigate(['']);
       });
   }
   loginSocial(tokenServer){
