@@ -11,6 +11,7 @@ export class CartService {
       line.quantity += quantity;
   } else {
     this.lines.push(new CartLine(product, quantity));
+     localStorage.setItem('cart', JSON.stringify(this.lines));
   }
     this.recalculate();
   }

@@ -1,4 +1,25 @@
-<div class="row">
+<div class="row" *ngIf="auth.isAuthenticated">
+  <div class="col-md-3">
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="thumbnail">
+          <img src="{{auth.photo}}" alt="...">
+          <div class="caption">
+            <h3>{{auth.name}}</h3>
+            <p>Tienes 0 puntos por compras</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="page-header">
+      <h1>Dirección<small> de entrega</small></h1>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="!auth.isAuthenticated">
   <div class="col-md-6">
     <div class="page-header">
       <h1>Registrate<small> con tu email</small></h1>

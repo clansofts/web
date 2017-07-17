@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   baseUrl = 'http://localhost:3000/oauth';
   nameKey = 'name';
+  photoKey = 'photo';
   tokenKey = 'token';
   constructor(
     private http: Http,
@@ -13,6 +14,9 @@ export class AuthService {
   ) { }
   get name() {
     return localStorage.getItem(this.nameKey);
+  }
+  get photo() {
+    return localStorage.getItem(this.photoKey);
   }
   get isAuthenticated(){
     return !!localStorage.getItem(this.tokenKey);
@@ -30,13 +34,20 @@ export class AuthService {
         if(!authResponse.token)
           return;
         localStorage.setItem(this.tokenKey, authResponse.token)
-        localStorage.setItem(this.nameKey, authResponse.firstName)
+        localStorage.setItem(this.nameKey, authResponse.firstName + authResponse.lastName)
         this.router.navigate(['']);
       });
   }
   loginSocial(tokenServer){
     localStorage.setItem(this.tokenKey, tokenServer)
-    this.router.navigate(['/messages']);
+    this.http.get(this.baseUrl + '/user/me', this.tokenHeader).subscribe(res =>{
+      var authResponse = res.json();
+      localStorage.setItem(this.nameKey, authResponse.firstName + ' ' + authResponse.lastName)
+      localStorage.setItem(this.photoKey, authResponse.photo)
+      this.router.navigate(['']);
+    });
+    
+    
   }
   logout(){
     localStorage.removeItem(this.tokenKey);
