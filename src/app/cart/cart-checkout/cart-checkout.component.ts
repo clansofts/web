@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../auth/auth.service';
+import { MapsComponent } from './../../users/maps/maps.component'
 
 @Component({
   selector: 'app-cart-checkout',

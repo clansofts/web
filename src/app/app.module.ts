@@ -21,6 +21,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { UsersComponent } from './users/users.component';
+import { MapsComponent } from './users/maps/maps.component';
+import { OrdersComponent } from './orders/orders.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCsEgj7wbxqPO2CO68fYVFcYephX0w3qtE",
@@ -43,7 +46,10 @@ export const firebaseConfig = {
     CartDetailComponent,
     CartCheckoutComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    UsersComponent,
+    MapsComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
