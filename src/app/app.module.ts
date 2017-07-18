@@ -1,13 +1,18 @@
+/*****Modulos******/
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule }   from '@angular/router';
-import { AppRoutes } from './app.routes';
 import { CartModule } from './cart/cart.module';
 import { AuthModule } from './auth/auth.module';
+/*****Rutas******/
+import { AppRoutes } from './app.routes';
+/*****Servicios******/
 import { CartService } from "./cart/cart.service";
 import { AuthService } from "./auth/auth.service";
+/*****Componentes ******/
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { StoreComponent } from './store/store.component';
@@ -15,15 +20,17 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CartDetailComponent } from './cart/cart-detail/cart-detail.component';
 import { CartCheckoutComponent } from './cart/cart-checkout/cart-checkout.component';
 import { CartComponent } from './cart/cart.component';
-/*  * Angular Firebase  */ 
-import {AngularFireModule} from 'angularfire2'; 
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { UsersComponent } from './users/users.component';
 import { MapsComponent } from './users/maps/maps.component';
 import { OrdersComponent } from './orders/orders.component';
+/*  * Angular Firebase  */ 
+import {AngularFireModule} from 'angularfire2'; 
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { ProductsComponent } from './products/products.component';
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCsEgj7wbxqPO2CO68fYVFcYephX0w3qtE",
@@ -49,10 +56,12 @@ export const firebaseConfig = {
     SignupComponent,
     UsersComponent,
     MapsComponent,
-    OrdersComponent
+    OrdersComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
