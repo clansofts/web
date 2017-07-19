@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { AppRoutes } from './app.routes';
 /*****Servicios******/
 import { CartService } from "./cart/cart.service";
+import { ChatService } from "./chat/chat.service";
 import { AuthService } from "./auth/auth.service";
 /*****Componentes ******/
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import {AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ProductsComponent } from './products/products.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 export const firebaseConfig = {
@@ -57,7 +59,8 @@ export const firebaseConfig = {
     UsersComponent,
     MapsComponent,
     OrdersComponent,
-    ProductsComponent
+    ProductsComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ export const firebaseConfig = {
     ],
   providers: [
     CartService,
+    ChatService,
     AuthService
   ],
   bootstrap: [AppComponent]
