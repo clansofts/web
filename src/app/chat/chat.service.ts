@@ -2,24 +2,27 @@
 //import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import io from 'socket.io-client';
-//import { Router } from '@angular/router';
+import { AuthService } from './../auth/auth.service';
+import { Router } from '@angular/router';
 
 //import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable()
 export class ChatService {
   private socket: any;
-  //socket: SocketIOClient.Socket;
   constructor(
-    //private _router:Router, 
-    //private _authenticationService: AuthenticationService
+    private router:Router, 
+    private auth: AuthService
   ) { 
-    this.socket = io('http://localhost:3000');
-    
+    this.socket = io.connect('http://localhost:3000', {
+      'query': 'token=' + this.auth.token
+  });
+
+
 /*       if (this._authenticationService.isLoggedIn()) {
         this.socket = io();
       } else {
-        this._router.navigate(['Home']);
+        this._router.navigate(['login']);
       }   */  
   }
   on(eventName, callback) {

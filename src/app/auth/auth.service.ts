@@ -18,6 +18,9 @@ export class AuthService {
   get photo() {
     return localStorage.getItem(this.photoKey);
   }
+  get token() {
+    return localStorage.getItem(this.tokenKey);
+  }
   get isAuthenticated(){
     return !!localStorage.getItem(this.tokenKey);
   }
