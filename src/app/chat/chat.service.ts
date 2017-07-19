@@ -33,7 +33,7 @@ export class ChatService {
     }
   };
 
-  emit(eventName: any, data: any) {
+  emit(eventName, data) {
       if (this.socket) {
         this.socket.emit(eventName, data);
       }
