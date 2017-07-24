@@ -1,5 +1,5 @@
 //import 'rxjs/Rx';
-//import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import io from 'socket.io-client';
 import { AuthService } from './../auth/auth.service';
@@ -16,7 +16,7 @@ export class ChatService {
   ) { 
     this.socket = io.connect('http://localhost:3000', {
       'query': 'token=' + this.auth.token
-  });
+    });
 
 
 /*       if (this._authenticationService.isLoggedIn()) {
@@ -44,4 +44,20 @@ export class ChatService {
       this.socket.removeListener(eventName);
     }
   };
+
+  getUsers(){
+    let observable = new Observable(observer => {
+      this.socket.on('user.connected', (data) => {
+        observer.next(data);    
+      });
+      return () => {
+        this.socket.disconnect();
+      };  
+    })     
+    return observable;
+
+  }
+
+
+
 }

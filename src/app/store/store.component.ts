@@ -26,7 +26,8 @@ export class StoreComponent implements OnInit {
 	getproducts():void{
 		this.http.request(this.baseUrl + this.accessKey)
 			.subscribe((response:Response)=>{
-				this.products_API = response.json().result;
+        this.products_API = response.json().result;
+        console.log(this.products_API)
 			})
   }
   addProductToCart(product: Product) {

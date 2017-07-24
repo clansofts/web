@@ -1,21 +1,21 @@
 <div class="row">
-  <div class="col-md-6">
-    <h1><span class="glyphicon glyphicon-heart"></span> Usuarios conectados</h1>
-    <div *ngFor="let userOnline of usersOnline"> 
-      <span><img src="{{userOnline.photo}}" alt="">{{userOnline.username}} <a (click)="sendHug(userOnline.id)">Hug</a></span>
-       <p><span class="glyphicon glyphicon-heart-empty"></span> You just hugged </p>
-      <p><span class="glyphicon glyphicon-heart"></span>just hugged you.</p>
+  <div class="col-md-3">
+    <div class="list-group">
+      <a class="list-group-item active">
+        Usuarios Conectados
+      </a>
+      <a class="list-group-item" *ngFor="let userOnline of usersOnline">
+        <span>{{userOnline.name}}</span>
+      </a>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-9">
+    <div class="list-group">
+      <a class="list-group-item active">
+        Chat
+      </a>
+    </div>
     <div *ngFor="let message of messages" [ngSwitch]="message.type">
-        <strong *ngSwitchCase="'status'">
-          <span>{{message.created}}</span>
-          <span>{{message.username}}</span>
-          <span>is</span>
-          <span>{{message.text}}</span>
-          <span>{{message.id}}</span>
-        </strong>
         <span *ngSwitchDefault>
           <span>{{message.created}}</span>
           <span>{{message.username}}:</span>

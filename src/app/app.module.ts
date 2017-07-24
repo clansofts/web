@@ -32,6 +32,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ProductsComponent } from './products/products.component';
 import { ChatComponent } from './chat/chat.component';
+import { MusicComponent } from './music/music.component';
+import { SearchComponent } from './search/search.component';
 
 
 export const firebaseConfig = {
@@ -60,7 +62,9 @@ export const firebaseConfig = {
     MapsComponent,
     OrdersComponent,
     ProductsComponent,
-    ChatComponent
+    ChatComponent,
+    MusicComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
