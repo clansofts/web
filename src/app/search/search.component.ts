@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core'; 
+import { Observable } from 'rxjs/Observable'; 
+import 'rxjs/add/observable/fromEvent'; 
+import 'rxjs/add/operator/map'; 
+import { SearchService } from './search.service';
 
 @Component({
   selector: 'app-search',
@@ -7,9 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('searchInput') searchInput; 
+  productNames: Array<string>; 
+  
+  constructor(
+    private searchService : SearchService
+  ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { 
+    Observable.fromEvent(this.searchInput.nativeElement, 'keyup') 
+    .map((event: KeyboardEvent)=>(<HTMLInputElement>event.target).value) 
+    .subscribe(name =>  
+      this.searchService.getProductNames(name) 
+          .subscribe(productNames=>this.productNames = productNames
+          )); 
 
+  } 
 }

@@ -7,6 +7,7 @@
       <p class="navbar-text">Play eCommerce</p>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <app-search></app-search>
       <ul class="nav navbar-nav navbar-right">
         <li><a><app-cart></app-cart></a></li>
         <li *ngIf="!auth.isAuthenticated"><a routerLink="login">Iniciar Sesión</a></li>

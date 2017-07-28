@@ -13,6 +13,7 @@ import { AppRoutes } from './app.routes';
 import { CartService } from "./cart/cart.service";
 import { ChatService } from "./chat/chat.service";
 import { AuthService } from "./auth/auth.service";
+import { SearchService } from "./search/search.service";
 /*****Componentes ******/
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
@@ -82,7 +83,8 @@ export const firebaseConfig = {
   providers: [
     CartService,
     ChatService,
-    AuthService
+    AuthService,
+    SearchService
   ],
   bootstrap: [AppComponent]
 })
