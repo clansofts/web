@@ -13,7 +13,7 @@ import { AppRoutes } from './app.routes';
 import { CartService } from "./cart/cart.service";
 import { ChatService } from "./chat/chat.service";
 import { AuthService } from "./auth/auth.service";
-import { SearchService } from "./search/search.service";
+import { AppService } from "./app.service";
 /*****Componentes ******/
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
@@ -26,15 +26,11 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { UsersComponent } from './users/users.component';
 import { MapsComponent } from './users/maps/maps.component';
-import { OrdersComponent } from './orders/orders.component';
 /*  * Angular Firebase  */ 
 import {AngularFireModule} from 'angularfire2'; 
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { ProductsComponent } from './products/products.component';
 import { ChatComponent } from './chat/chat.component';
-import { MusicComponent } from './music/music.component';
-import { SearchComponent } from './search/search.component';
 
 
 export const firebaseConfig = {
@@ -61,11 +57,7 @@ export const firebaseConfig = {
     SignupComponent,
     UsersComponent,
     MapsComponent,
-    OrdersComponent,
-    ProductsComponent,
     ChatComponent,
-    MusicComponent,
-    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +76,7 @@ export const firebaseConfig = {
     CartService,
     ChatService,
     AuthService,
-    SearchService
+    AppService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../auth/auth.service';
-import { Hero } from './../../model/hero.model';
 
 
 @Component({
@@ -10,16 +9,16 @@ import { Hero } from './../../model/hero.model';
 })
 export class CartCheckoutComponent implements OnInit {
   powers = ['Efectivo', 'Datafono',];
-  model = new Hero(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
+  //model = new Hero(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
   submitted = false;
   onSubmit() { this.submitted = true; }
 
   // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.model); }
-  constructor(private auth: AuthService) { }
+ // get diagnostic() { return JSON.stringify(this.model); }
+  constructor(public auth: AuthService) { }
 
   newHero() {
-    this.model = new Hero(42, '', '');
+    //this.model = new Hero(42, '', '');
   }
 
   ngOnInit() {

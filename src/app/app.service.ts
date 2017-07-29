@@ -2,12 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable'; 
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/observable/of';
-import { Product } from "../model/product.model";
-
-
+import { Product } from "./model/product.model";
 @Injectable()
-export class SearchService {
-  
+export class AppService {
+
+
   baseUrl = 'https://lcboapi.com/products';
   accessKey='?access_key=MDpmNmJhMzM5ZS01ZGE5LTExZTctOTJhZC0zNzQ1YzhiOWU3OWI6Z1JkVDlENlJhaHRqMlFhVE5lRmI2MVExSVNrRE1BRWJVeExT';
 	productsList: Product[];
@@ -18,7 +17,6 @@ export class SearchService {
    	this.http.request(this.baseUrl + this.accessKey)
 			.subscribe((response:Response)=>{
         this.productsList = response.json().result;
-        console.log(this.productsList)
 			}) 
   }
 
@@ -35,4 +33,5 @@ export class SearchService {
    return name ? 
       this.productsList.filter((product)=> new RegExp(name, 'gi').test(product.name)):[]; 
   }
+
 }

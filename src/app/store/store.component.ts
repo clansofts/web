@@ -9,7 +9,6 @@ import { Product } from "../model/product.model";
   styleUrls: ['./store.component.css']
 })
 export class StoreComponent implements OnInit {
-  master = 'Master';
   constructor(
     private cart: CartService,
     private appService: AppService
