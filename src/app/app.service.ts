@@ -8,7 +8,8 @@ export class AppService {
 
 
   baseUrl = 'https://lcboapi.com/products';
-  accessKey='?access_key=MDpmNmJhMzM5ZS01ZGE5LTExZTctOTJhZC0zNzQ1YzhiOWU3OWI6Z1JkVDlENlJhaHRqMlFhVE5lRmI2MVExSVNrRE1BRWJVeExT';
+  accessKey='?access_key=MDo5YjA3Y2JkNC03NDA1LTExZTctYTQ0OC02M2U1ZjJjNDM2YzU6bmtxZ1lLUHBmMkgyR2FGOFlHWW5GQ1FhTld3M25RSmsyUXFL';
+  //accessKey='?access_key=MDpmNmJhMzM5ZS01ZGE5LTExZTctOTJhZC0zNzQ1YzhiOWU3OWI6Z1JkVDlENlJhaHRqMlFhVE5lRmI2MVExSVNrRE1BRWJVeExT';
 	productsList: Product[];
 
   constructor(

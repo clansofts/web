@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  baseUrl = 'http://localhost:3000/oauth';
+  baseUrl = 'https://api.playecommerce.com/oauth';
   nameKey = 'name';
   photoKey = 'photo';
   tokenKey = 'token';
