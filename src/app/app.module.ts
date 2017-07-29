@@ -32,6 +32,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ChatComponent } from './chat/chat.component';
 
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCsEgj7wbxqPO2CO68fYVFcYephX0w3qtE",
@@ -76,7 +77,8 @@ export const firebaseConfig = {
     CartService,
     ChatService,
     AuthService,
-    AppService
+    AppService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy} 
   ],
   bootstrap: [AppComponent]
 })
