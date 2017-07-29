@@ -43,11 +43,8 @@ export class AuthService {
   }
   loginSocial(tokenServer){
     localStorage.setItem(this.tokenKey, tokenServer)
-
-    console.log(tokenServer)
     this.http.get(this.baseUrl + '/user/me', this.tokenHeader).subscribe(res =>{
       var authResponse = res.json();
-      console.log(authResponse)
       localStorage.setItem(this.nameKey, authResponse.firstName + ' ' + authResponse.lastName)
       localStorage.setItem(this.photoKey, authResponse.photo)
       this.router.navigate(['']);
