@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
+import { environment } from './../../environments/environment';
 
 @Injectable()
 export class AuthService {
-  baseUrl = 'https://api.playecommerce.com/oauth';
+  baseUrl = environment.apiUrl;
   nameKey = 'name';
   photoKey = 'photo';
   tokenKey = 'token';
@@ -31,9 +32,10 @@ export class AuthService {
     return new RequestOptions({headers: header});
   }
   login(user){
-    this.http.post(this.baseUrl + '/login', user)
+    this.http.post(this.baseUrl + '/oauth/login', user)
       .subscribe(res =>{
         var authResponse = res.json();
+        console.log(authResponse)
         if(!authResponse.token)
           return;
         localStorage.setItem(this.tokenKey, authResponse.token)
@@ -43,7 +45,7 @@ export class AuthService {
   }
   loginSocial(tokenServer){
     localStorage.setItem(this.tokenKey, tokenServer)
-    this.http.get(this.baseUrl + '/user/me', this.tokenHeader).subscribe(res =>{
+    this.http.get(this.baseUrl + '/oauth/user/me', this.tokenHeader).subscribe(res =>{
       var authResponse = res.json();
       localStorage.setItem(this.nameKey, authResponse.firstName + ' ' + authResponse.lastName)
       localStorage.setItem(this.photoKey, authResponse.photo)

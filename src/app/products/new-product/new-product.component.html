@@ -1,0 +1,53 @@
+<!-- <div class="col-sm-6">
+  <h1>New Product</h1>
+  <form #form="ngForm" (ngSubmit)="addProduct(form.value)">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Nombre de Producto</label>
+    <input type="text" name="title" [(ngModel)]="title" class="form-control" id="exampleInputEmail1" placeholder="Nombre de Producto">
+    <label for="exampleInputEmail1">Descripcion de Producto</label>
+    <textarea rows="3" name="description" [(ngModel)]="description" class="form-control" id="exampleInputEmail1" placeholder="Nombre de Producto"></textarea>
+
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+<div class="col-sm-6">
+  Result
+</div> -->
+<div class="add-form-container">
+  <div class="ui icon message" *ngIf="newProduct">
+    <i class="notched check green icon"></i>
+    <i class="close icon" (click)="newProduct = null"></i>
+    <div class="content">
+      <div class="header">
+        New contact added!
+      </div>
+      <p>Name: {{newProduct.name}}</p>
+    </div>
+  </div>
+  <form class="ui big form" #productForm="ngForm" (submit)="onSubmit(productForm)" [class.loading]="loading">
+    <div class="fields">
+      <div class="eight wide field">
+        <label>Nombre del Producto</label>
+        <input type="text" placeholder="Product Name" name="name" ngModel>
+      </div>
+      <div class="eight wide field">
+        <label>Descripcion</label>
+        <textarea placeholder="Describe el producto" name="description" ngModel></textarea>
+      </div>
+      <div class="eight wide field">
+        <label>Precio</label>
+        <input type="text" placeholder="Precio" name="price" ngModel/>
+      </div>
+      <div class="eight wide field">
+        <label>Inventario</label>
+        <input type="text" placeholder="Cantida disponible" name="stock" ngModel>
+      </div>
+    </div>
+    <div class="field">
+      <label>Photo URL</label>
+      <input type="text" placeholder="http://cdn.com/profile.jpg" name="picture" ngModel>
+    </div>
+    <button type="submit" class="ui submit large grey button right floated">Submit</button>
+  </form>
+</div>

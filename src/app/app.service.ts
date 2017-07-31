@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable'; 
-import { Http, Response } from '@angular/http';
+import { Http, Headers, Request, RequestOptions, RequestMethod, Response } from '@angular/http';
 import 'rxjs/add/observable/of';
 import { Product } from "./model/product.model";
+import { environment } from './../environments/environment';
+import { AuthService } from './auth/auth.service';
+
+
 @Injectable()
 export class AppService {
-
 
   baseUrl = 'https://lcboapi.com/products';
   accessKey='?access_key=MDo5YjA3Y2JkNC03NDA1LTExZTctYTQ0OC02M2U1ZjJjNDM2YzU6bmtxZ1lLUHBmMkgyR2FGOFlHWW5GQ1FhTld3M25RSmsyUXFL';
@@ -13,7 +19,7 @@ export class AppService {
 	productsList: Product[];
 
   constructor(
-    private http:Http
+    private http:Http,
   ) { 
    	this.http.request(this.baseUrl + this.accessKey)
 			.subscribe((response:Response)=>{
@@ -35,4 +41,66 @@ export class AppService {
       this.productsList.filter((product)=> new RegExp(name, 'gi').test(product.name)):[]; 
   }
 
+
 }
+@Injectable()
+export class ApiService {
+
+  private baseUrl = environment.apiUrl;
+
+  constructor(private http: Http, private auth: AuthService) { }
+
+  get(url: string) {
+    return this.request(url, RequestMethod.Get);
+  }
+
+  post(url: string, body: Object) {
+    return this.request(url, RequestMethod.Post, body);
+  }
+
+  put(url: string, body: Object) {
+    return this.request(url, RequestMethod.Put, body);
+  }
+
+  delete(url: string) {
+    return this.request(url, RequestMethod.Delete);
+  }
+
+  request(url: string, method: RequestMethod, body?: Object) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', `Bearer ${this.auth.token}`);
+
+    const requestOptions = new RequestOptions({
+      url: `${this.baseUrl}/${url}`,
+      method: method,
+      headers: headers
+    });
+
+    if (body) {
+      requestOptions.body = body;
+    }
+
+    const request = new Request(requestOptions);
+
+    return this.http.request(request)
+      .map((res: Response) => res.json())
+      .catch((res: Response) => this.onRequestError(res));
+  }
+
+  onRequestError(res: Response) {
+    const statusCode = res.status;
+    const body = res.json();
+
+    const error = {
+      statusCode: statusCode,
+      error: body.error
+    };
+
+    console.log(error);
+
+    return Observable.throw(error);
+  }
+
+}
+

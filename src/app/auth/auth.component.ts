@@ -5,12 +5,15 @@ import { Router, ActivatedRoute, ParamMap, RouterState  } from '@angular/router'
 import * as firebase from 'firebase/app';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { environment } from './../../environments/environment';
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
+  baseUrl = environment.apiUrl;
   form;
   id;
   constructor(

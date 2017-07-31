@@ -13,7 +13,7 @@ import { AppRoutes } from './app.routes';
 import { CartService } from "./cart/cart.service";
 import { ChatService } from "./chat/chat.service";
 import { AuthService } from "./auth/auth.service";
-import { AppService } from "./app.service";
+import { AppService, ApiService } from "./app.service";
 /*****Componentes ******/
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
@@ -33,6 +33,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ChatComponent } from './chat/chat.component';
 
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import { ProductsComponent } from './products/products.component';
+import { NewProductComponent } from './products/new-product/new-product.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCsEgj7wbxqPO2CO68fYVFcYephX0w3qtE",
@@ -59,6 +61,8 @@ export const firebaseConfig = {
     UsersComponent,
     MapsComponent,
     ChatComponent,
+    ProductsComponent,
+    NewProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,7 +82,11 @@ export const firebaseConfig = {
     ChatService,
     AuthService,
     AppService,
-    {provide: LocationStrategy, useClass: HashLocationStrategy} 
+    ApiService,
+    {
+      provide: LocationStrategy, 
+      useClass: HashLocationStrategy
+    } 
   ],
   bootstrap: [AppComponent]
 })
