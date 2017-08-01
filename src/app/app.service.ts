@@ -13,17 +13,15 @@ import { AuthService } from './auth/auth.service';
 @Injectable()
 export class AppService {
 
-  baseUrl = 'https://lcboapi.com/products';
-  accessKey='?access_key=MDo5YjA3Y2JkNC03NDA1LTExZTctYTQ0OC02M2U1ZjJjNDM2YzU6bmtxZ1lLUHBmMkgyR2FGOFlHWW5GQ1FhTld3M25RSmsyUXFL';
-  //accessKey='?access_key=MDpmNmJhMzM5ZS01ZGE5LTExZTctOTJhZC0zNzQ1YzhiOWU3OWI6Z1JkVDlENlJhaHRqMlFhVE5lRmI2MVExSVNrRE1BRWJVeExT';
-	productsList: Product[];
+  baseUrl = environment.apiUrl;
+  productsList: Product[];
 
   constructor(
     private http:Http,
   ) { 
-   	this.http.request(this.baseUrl + this.accessKey)
+   	this.http.request(this.baseUrl + '/products')
 			.subscribe((response:Response)=>{
-        this.productsList = response.json().result;
+        this.productsList = response.json();
 			}) 
   }
 

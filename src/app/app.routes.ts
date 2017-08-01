@@ -8,7 +8,7 @@ import { NewProductComponent } from './products/new-product/new-product.componen
 
 export const AppRoutes: Routes = [
     //{path: 'login', component: AuthComponent},
-    {path: '', component: StoreComponent},
+    {path: '', component: ProductsComponent},
     {path: 'chat', component: ChatComponent},
     {path: 'products', component: ProductsComponent},
     {path: 'products/new', component: NewProductComponent},

@@ -1,1 +1,9 @@
-hello
+<div class="row">
+<div class="col-md-4" *ngFor="let product of products">
+ <a href="#" class="thumbnail">
+      <img src="{{product.picture}}/350x150?text={{product.name}}" alt="...">
+    </a>
+</div>
+</div>
+
+

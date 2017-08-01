@@ -35,6 +35,7 @@ import { ChatComponent } from './chat/chat.component';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { ProductsComponent } from './products/products.component';
 import { NewProductComponent } from './products/new-product/new-product.component';
+import { AddCategoriesComponent } from './products/add-categories/add-categories.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCsEgj7wbxqPO2CO68fYVFcYephX0w3qtE",
@@ -63,6 +64,7 @@ export const firebaseConfig = {
     ChatComponent,
     ProductsComponent,
     NewProductComponent,
+    AddCategoriesComponent,
   ],
   imports: [
     BrowserModule,

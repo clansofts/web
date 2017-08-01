@@ -1,5 +1,7 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ApiService } from './../app.service';
+import { Product } from './../shared/product.model';
 
 
 @Component({
@@ -8,11 +10,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+    products: Product[];
+    @Input('master') masterName: string;
     
-    constructor() {
-    }
+    constructor(
+      public api: ApiService,
+      ) { }
     ngOnInit() {
-        
+        this.getProducts();
+    }
+
+    getProducts(){
+      this.api.get('products')
+      .subscribe(data => this.products = data)
     }
 
 }
