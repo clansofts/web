@@ -16,7 +16,5 @@ export class StoreComponent implements OnInit {
   ngOnInit() {
   }
 
-  addProductToCart(product: Product) {
-		this.cart.addLine(product);
-	}
+
 }

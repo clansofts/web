@@ -13,6 +13,9 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.cart.addLocalstorage();
   }
+
+
 
 }

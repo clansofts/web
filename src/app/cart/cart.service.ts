@@ -1,12 +1,23 @@
 import { Injectable } from '@angular/core';
-import { Product } from "./../model/product.model";
+//import { Product } from "./../model/product.model";
+import { Product } from './../shared/product.model';
+
 @Injectable()
 export class CartService {
   public lines: CartLine[] = [];
   public itemCount: number = 0;
   public cartPrice: number = 0;
+  cartKey = 'cart';
+
+ 
+  addLocalstorage(){
+    var words = JSON.parse(localStorage.getItem(this.cartKey));
+    for(var myKey in words) {
+      this.lines.push(new CartLine(words[myKey].product, words[myKey].quantity));
+    }
+  }
   addLine(product: Product, quantity: number = 1) {
-    let line = this.lines.find(line => line.product.id == product.id);
+    let line = this.lines.find(line => line.product._id == product._id);
     if (line != undefined) {
       line.quantity += quantity;
   } else {
@@ -16,14 +27,14 @@ export class CartService {
     this.recalculate();
   }
   updateQuantity(product: Product, quantity: number) {
-    let line = this.lines.find(line => line.product.id == product.id);
+    let line = this.lines.find(line => line.product._id == product._id);
     if (line != undefined) {
       line.quantity = Number(quantity);
     }
     this.recalculate();
   }
   removeLine(id: number) {
-    let index = this.lines.findIndex(line => line.product.id == id);
+    let index = this.lines.findIndex(line => line.product._id == id);
     this.lines.splice(index);
     this.recalculate();
   }
@@ -38,7 +49,7 @@ export class CartService {
     this.cartPrice = 0;
     this.lines.forEach(l => {
       this.itemCount += l.quantity;
-      this.cartPrice += (l.quantity * l.product.price_in_cents);
+      this.cartPrice += (l.quantity * l.product.price);
     })
   }
 }
@@ -48,6 +59,6 @@ export class CartLine {
     public quantity: number
   ) {}
   get lineTotal() {
-    return this.quantity * this.product.price_in_cents;
+    return this.quantity * this.product.price;
   }
 }

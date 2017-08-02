@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {NgForm } from '@angular/forms';
-import { Product } from './../../shared/product.model';
+//import { Product } from './../../shared/product.model';
 import { ApiService } from './../../app.service';
 import { AngularFireDatabase} from 'angularfire2/database';
 import { Observable } from 'rxjs';
@@ -16,7 +16,7 @@ import * as firebase from 'firebase';
 export class NewProductComponent implements OnInit {
  
   loading: Boolean = false;
-  newProduct: Product;
+  newProduct;
   folder: string = 'img';
 
   constructor(
@@ -45,7 +45,7 @@ export class NewProductComponent implements OnInit {
                 //console.log('Uploaded a blob or file! Now storing the reference at',`/${this.folder}/`);
                 //db.list(`/${folder}/`).push({ path: path, filename: selectedFile.name })
                 //console.log('File available at', url);
-                  const product: Product = {
+                  const product = {
                     name: `${formValues.name}`,
                     description: `${formValues.description}`,
                     price: formValues.price,
