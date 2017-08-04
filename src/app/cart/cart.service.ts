@@ -10,9 +10,9 @@ export class CartService {
 
  
   addLocalstorage(){
-    var words = JSON.parse(localStorage.getItem(this.cartKey));
-    for(var myKey in words) {
-      this.lines.push(new CartLine(words[myKey].product, words[myKey].quantity));
+    var products = JSON.parse(localStorage.getItem(this.cartKey));
+    for(var id in products) {
+      this.lines.push(new CartLine(products[id].product, products[id].quantity));
     }
     this.recalculate();
   }
@@ -33,9 +33,7 @@ export class CartService {
     this.recalculate();
   }
   removeLine(id: number) {
-    console.log(id);
     let index = this.lines.findIndex(line => line.product._id == id);
-    console.log(index);
     this.lines.splice(index, 1);
     this.recalculate();
   }
