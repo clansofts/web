@@ -12,6 +12,7 @@ import { CartService } from "./../cart/cart.service";
 })
 export class ProductsComponent implements OnInit {
   products: Product[];
+  selectedProduct: Product; 
   @Input('master') masterName: string;
   
   constructor(
@@ -25,6 +26,12 @@ export class ProductsComponent implements OnInit {
   getProducts(){
     this.api.get('products')
       .subscribe(data => this.products = data)
+  }
+
+  getProductDetail(id:number){
+     var selectedProduct = this.products
+     .filter(product => product._id === id);
+     this.selectedProduct = selectedProduct[0]; 
   }
 
   addProductToCart(product: Product) {

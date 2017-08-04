@@ -36,6 +36,7 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { ProductsComponent } from './products/products.component';
 import { NewProductComponent } from './products/new-product/new-product.component';
 import { AddCategoriesComponent } from './products/add-categories/add-categories.component';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCsEgj7wbxqPO2CO68fYVFcYephX0w3qtE",
@@ -65,6 +66,7 @@ export const firebaseConfig = {
     ProductsComponent,
     NewProductComponent,
     AddCategoriesComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,
