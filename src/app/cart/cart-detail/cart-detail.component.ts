@@ -20,7 +20,7 @@ export class CartDetailComponent implements OnInit {
   }
 
   enviarOrden(){
-     this.api.post('orders', this.products);
+     this.api.post('orders', this.products).subscribe();
      console.log(this.products)
   }
 }
