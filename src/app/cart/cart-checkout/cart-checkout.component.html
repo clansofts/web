@@ -2,69 +2,70 @@
   <div  class="col-md-3">
   </div>
   <div  class="col-md-6">
-    <form (ngSubmit)="onSubmit()" #heroForm="ngForm" [hidden]="submitted">
+    <form #addressForm="ngForm" (submit)="onSubmit(addressForm)" [hidden]="submitted">
       <div class="form-group">
         <label for="inputText1">Direccion</label>
-        <input type="text" class="form-control" id="inputText1" placeholder="Ej. Calle 72 # 5B - 32">
+        <input type="text" class="form-control" id="inputText1" placeholder="Ej. Calle 72 # 5B - 32" name="line_1" ngModel>
       </div>
       <div class="form-group">
         <label for="inputText2">Direccion</label>
-        <input type="text" class="form-control" id="inputText2" placeholder="Ej. Apartamento, Condominio, Torre">
+        <input type="text" class="form-control" id="inputText2" placeholder="Ej. Apartamento, Condominio, Torre" name="line_2" ngModel>
       </div>
       <div class="form-group">
         <label for="inputText3">Barrio</label>
-        <input type="text" class="form-control" id="inputText3" placeholder="Barrio">
+        <input type="text" class="form-control" id="inputText3" placeholder="Barrio" name="line_3" ngModel>
       </div>
       <div class="form-group">
         <label for="inputText4">Telefono</label>
-        <input type="text" class="form-control" id="inputText4" placeholder="Telefono">
+        <input type="text" class="form-control" id="inputText4" placeholder="Telefono" name="phone_1" ngModel>
       </div>
-      <button type="submit" class="btn btn-default">Pagar</button>
+      <div class="form-group">
+        <label for="inputText5">Movil</label>
+        <input type="text" class="form-control" id="inputText5" placeholder="Movil" name="phone_2" ngModel>
+      </div>
+      <button type="submit" class="btn btn-primary pull-right">Pagar</button>
     </form>
-    <div class="panel panel-primary" [hidden]="!submitted">
+    <div class="panel panel-primary"  *ngIf="newAddress" [hidden]="!submitted">
       <div class="panel-body">
         Direccion de entrega <button class="btn btn-primary pull-right" (click)="submitted=false">Otra</button>
       </div>
       <div class="panel-footer">
         <div class="row">
-          <div class="col-xs-3">Name</div>
-          <div class="col-xs-9  pull-left">{{ model.name }}</div>
+          <div class="col-xs-3">Direccion</div>
+          <div class="col-xs-9  pull-left">{{newAddress.address}}</div>
         </div>
         <div class="row">
-          <div class="col-xs-3">Alter Ego</div>
-          <div class="col-xs-9 pull-left">{{ model.alterEgo }}</div>
+          <div class="col-xs-3">Barrio</div>
+          <div class="col-xs-9 pull-left">{{newAddress.neighborhood}}</div>
         </div>
         <div class="row">
-          <div class="col-xs-3">Power</div>
-          <div class="col-xs-9 pull-left">{{ model.power }}</div>
+          <div class="col-xs-3">Indicaciones</div>
+          <div class="col-xs-9 pull-left">{{newAddress.indications}}</div>
         </div>
         <br>
       </div>
     </div>
-    {{diagnostic}}
     <form (ngSubmit)="onSubmitPayment()" #paymentForm="ngForm" [hidden]="!submitted">
     <div class="form-group">
-      <label for="power">Forma de pago</label>
-      <select class="form-control"  id="power" required [(ngModel)]="model.power" name="power">
-        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+      <label for="paymentMethods">Forma de pago</label>
+      <select class="form-control"  id="paymentMethods">
+        <option *ngFor="let pay of paymentMethods" [value]="pay">{{pay}}</option>
       </select>
     </div>
-    <input type="text" class="form-control" id="name"
-          required
-          [(ngModel)]="model.name" name="name"
-          #name="ngModel">
-    <div [hidden]="name.valid || name.pristine"
-        class="alert alert-danger">
-      Name is required
-    </div>
-      <div class="form-group">
-        <label for="alterEgo">Alter Ego</label>
-        <input type="text"  class="form-control" id="alterEgo" [(ngModel)]="model.alterEgo" name="alterEgo">
-      </div>
+    <button (click)="enviarOrden()" class="btn btn-success">Finalizar</button>
     
-
-    <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
     </form>
+  
+  </div>  
+  <div  class="col-md-3">
+  </div>
+</div>
+
+
+
+
+    <!-- 
+    
   </div>
   <div > 
   <div  class="col-md-3">
@@ -74,7 +75,7 @@
 
 
 
-<!-- 
+
 <div class="row">
       <div class="col-sm-12 col-md-12">
         <div class="thumbnail">
