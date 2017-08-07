@@ -4,17 +4,19 @@ import { Injectable } from '@angular/core';
 import io from 'socket.io-client';
 import { AuthService } from './../auth/auth.service';
 import { Router } from '@angular/router';
+import { environment } from './../../environments/environment';
 
 //import { AuthenticationService } from '../authentication/authentication.service';
 
 @Injectable()
 export class ChatService {
+  baseUrl = environment.apiUrl;
   private socket: any;
   constructor(
     private router:Router, 
     private auth: AuthService
   ) { 
-    this.socket = io.connect('http://localhost:3000', {
+    this.socket = io.connect(this.baseUrl, {
       'query': 'token=' + this.auth.token
     });
 

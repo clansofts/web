@@ -41,6 +41,7 @@ export class CartService {
     this.lines = [];
     this.itemCount = 0;
     this.cartPrice = 0;
+    localStorage.removeItem(this.cartKey);
   }
   
   private recalculate() {

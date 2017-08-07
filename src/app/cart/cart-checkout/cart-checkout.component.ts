@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../auth/auth.service';
 import { ApiService } from './../../app.service';
+import { CartService } from './../cart.service';
 import { NgForm } from '@angular/forms';
 import { Address } from './../../shared/address.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-checkout',
@@ -10,32 +12,32 @@ import { Address } from './../../shared/address.model';
   styleUrls: ['./cart-checkout.component.css']
 })
 export class CartCheckoutComponent implements OnInit {
-  loading: Boolean = false;
-  newAddress: Address;
-  cartKey = 'cart';
-  products= JSON.parse(localStorage.getItem(this.cartKey));
-  submitted = false;
-  paymentMethods = ['Efectivo', 'Datafono'];
   
-
+  cartKey = 'cart';
+  paymentMethods = ['Efectivo', 'Datafono'];
+  Addresses: Address;
+  newAddress: Address;
+  direcciones: Boolean;
+  submitted:Boolean = false;
+  direccionDeEntrega:Number;
 
   constructor(
     public auth: AuthService,
     public api: ApiService,
+    public router: Router,
+    public cart: CartService
   ) { }
 
-
-
   ngOnInit() {
-
+    this.api.get('address').subscribe(data => {
+      this.Addresses = data.addresses;
+      this.direcciones= data.message;
+    });
   }
 
   onSubmit(form: NgForm) {
-    this.loading = true;
     this.submitted = true;
-
     const formValues = Object.assign({}, form.value);
-
     const address: Address = {
       line_1: `${formValues.line_1}`,
       line_2: `${formValues.line_2}`,
@@ -43,23 +45,28 @@ export class CartCheckoutComponent implements OnInit {
       phone_1: `${formValues.phone_1}`,
       phone_2: `${formValues.phone_2}`,
     };
-
     this.api.post('address', address)
       .subscribe(data => {
         form.reset();
-        this.loading = false;
         this.newAddress = data.address[0];
         console.log(this.newAddress)
       });
   }
-
-  enviarOrden(){
+  direccionId(id:Number){
+    this.direccionDeEntrega = id;  
+    this.submitted=true
+    console.log(this.direccionDeEntrega)
+  }
+  enviarOrden(paymethod?: String){
+    var products= JSON.parse(localStorage.getItem(this.cartKey));
     var order = { 
-      products: this.products,
-      paymethod: 'Efectivo',
-      address: this.newAddress._id
+      products: products,
+      paymethod: paymethod,
+      address: this.direccionDeEntrega
     }
     this.api.post('orders', order).subscribe();
+    this.cart.clear();
+    this.router.navigate(['/orders']);
   }
 
 

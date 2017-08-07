@@ -1,89 +1,89 @@
 <div class="row" *ngIf="auth.isAuthenticated">
-  <div  class="col-md-3">
+  <div  class="col-md-3" >
+    
   </div>
-  <div  class="col-md-6">
-    <form #addressForm="ngForm" (submit)="onSubmit(addressForm)" [hidden]="submitted">
-      <div class="form-group">
-        <label for="inputText1">Direccion</label>
-        <input type="text" class="form-control" id="inputText1" placeholder="Ej. Calle 72 # 5B - 32" name="line_1" ngModel>
-      </div>
-      <div class="form-group">
-        <label for="inputText2">Direccion</label>
-        <input type="text" class="form-control" id="inputText2" placeholder="Ej. Apartamento, Condominio, Torre" name="line_2" ngModel>
-      </div>
-      <div class="form-group">
-        <label for="inputText3">Barrio</label>
-        <input type="text" class="form-control" id="inputText3" placeholder="Barrio" name="line_3" ngModel>
-      </div>
-      <div class="form-group">
-        <label for="inputText4">Telefono</label>
-        <input type="text" class="form-control" id="inputText4" placeholder="Telefono" name="phone_1" ngModel>
-      </div>
-      <div class="form-group">
-        <label for="inputText5">Movil</label>
-        <input type="text" class="form-control" id="inputText5" placeholder="Movil" name="phone_2" ngModel>
-      </div>
-      <button type="submit" class="btn btn-primary pull-right">Pagar</button>
-    </form>
-    <div class="panel panel-primary"  *ngIf="newAddress" [hidden]="!submitted">
+  <div  class="col-md-6" *ngIf="!submitted"  [hidden]="!direcciones">
+    <div class="panel panel-primary">
       <div class="panel-body">
-        Direccion de entrega <button class="btn btn-primary pull-right" (click)="submitted=false">Otra</button>
+        Direccion de entrega <button class="btn btn-primary pull-right" (click)="direcciones=false">Atras</button>
       </div>
       <div class="panel-footer">
+        <form #addressForm="ngForm" (submit)="onSubmit(addressForm)">
+          <div class="form-group">
+            <label for="inputText1">Direccion</label>
+            <input type="text" class="form-control" id="inputText1" placeholder="Ej. Calle 72 # 5B - 32" name="line_1" ngModel>
+          </div>
+          <div class="form-group">
+            <label for="inputText2">Direccion</label>
+            <input type="text" class="form-control" id="inputText2" placeholder="Ej. Apartamento, Condominio, Torre" name="line_2" ngModel>
+          </div>
+          <div class="form-group">
+            <label for="inputText3">Barrio</label>
+            <input type="text" class="form-control" id="inputText3" placeholder="Barrio" name="line_3" ngModel>
+          </div>
+          <div class="form-group">
+            <label for="inputText4">Telefono</label>
+            <input type="text" class="form-control" id="inputText4" placeholder="Telefono" name="phone_1" ngModel>
+          </div>
+          <div class="form-group">
+            <label for="inputText5">Movil</label>
+            <input type="text" class="form-control" id="inputText5" placeholder="Movil" name="phone_2" ngModel>
+          </div>
+          <button type="submit" class="btn btn-primary pull-right">Pagar</button>
+        </form>
+      </div>
+    </div>
+        
+
+  </div>
+  <div  class="col-md-6" *ngIf="!submitted" [hidden]="direcciones">
+    <div class="panel panel-primary" >
+      <div class="panel-body">
+        Direccion de entrega <button class="btn btn-primary pull-right" (click)="direcciones=true">Otra</button>
+      </div>
+      <div class="panel-footer" *ngFor="let Address of Addresses">
         <div class="row">
           <div class="col-xs-3">Direccion</div>
-          <div class="col-xs-9  pull-left">{{newAddress.address}}</div>
+          <div class="col-xs-9  pull-left">{{Address.address}}</div>
         </div>
         <div class="row">
           <div class="col-xs-3">Barrio</div>
-          <div class="col-xs-9 pull-left">{{newAddress.neighborhood}}</div>
+          <div class="col-xs-9 pull-left">{{Address.neighborhood}}</div>
         </div>
         <div class="row">
           <div class="col-xs-3">Indicaciones</div>
-          <div class="col-xs-9 pull-left">{{newAddress.indications}}</div>
+          <div class="col-xs-9 pull-left">{{Address.indications}}</div>
         </div>
+        <div class="row">
+          <div class="col-xs-3">Telefono</div>
+          <div class="col-xs-9 pull-left">{{Address.phone}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">movile</div>
+          <div class="col-xs-9 pull-left">{{Address.cellphone}}</div>
+          {{Address._id}}
+        </div>
+        <button class="btn btn-primary pull-right" (click)="direccionId(Address._id)">Pagar</button>
         <br>
       </div>
     </div>
-    <form (ngSubmit)="onSubmitPayment()" #paymentForm="ngForm" [hidden]="!submitted">
+  </div> 
+  <div  class="col-md-6" >
+    <form (ngSubmit)="enviarOrden()" *ngIf="submitted" #paymentForm="ngForm" [hidden]="!submitted">
     <div class="form-group">
       <label for="paymentMethods">Forma de pago</label>
       <select class="form-control"  id="paymentMethods">
         <option *ngFor="let pay of paymentMethods" [value]="pay">{{pay}}</option>
       </select>
-    </div>
-    <button (click)="enviarOrden()" class="btn btn-success">Finalizar</button>
-    
-    </form>
-  
-  </div>  
-  <div  class="col-md-3">
-  </div>
-</div>
-
-
-
-
-    <!-- 
-    
-  </div>
-  <div > 
-  <div  class="col-md-3">
-  </div>
-</div>
-
-
-
-
-
-<div class="row">
-      <div class="col-sm-12 col-md-12">
-        <div class="thumbnail">
-          <img src="{{auth.photo}}" alt="...">
-          <div class="caption">
-            <h3>{{auth.name}}</h3>
-            <p>Tienes 0 puntos por compras</p>
-          </div>
-        </div>
+      <div class="form-group">
+        <label for="Pago">¿Con cuanto pagas?</label>
+        <input type="text" class="form-control" id="pago" placeholder="$50.000">
       </div>
-    </div> -->
+      
+    </div>
+    <button  type="submit" class="btn btn-success">Finalizar</button>
+    </form>
+  </div> 
+  <div  class="col-md-3">
+  </div>
+</div>
