@@ -48,8 +48,8 @@ export class CartCheckoutComponent implements OnInit {
     this.api.post('address', address)
       .subscribe(data => {
         form.reset();
-        this.newAddress = data.address[0];
-        console.log(this.newAddress)
+        this.newAddress = data;
+        this.direccionDeEntrega = data._id;
       });
   }
   direccionId(id:Number){
