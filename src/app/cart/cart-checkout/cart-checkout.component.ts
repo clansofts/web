@@ -55,7 +55,6 @@ export class CartCheckoutComponent implements OnInit {
   direccionId(id:Number){
     this.direccionDeEntrega = id;  
     this.submitted=true
-    console.log(this.direccionDeEntrega)
   }
   enviarOrden(paymethod?: String){
     var products= JSON.parse(localStorage.getItem(this.cartKey));
