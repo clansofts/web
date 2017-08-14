@@ -6,6 +6,7 @@ import {NgForm } from '@angular/forms';
 import { ApiService } from './../../app.service';
 import { Observable } from 'rxjs';
 import { Category } from './../../shared/category.model';
+import { environment } from './../../../environments/environment';
 
 
 
@@ -21,7 +22,7 @@ export class NewProductComponent implements OnInit {
   categories: Category[];
   loading: Boolean = false;
   newProduct;
-  
+  baseUrl = environment.apiUrl;
 
   constructor(
     public api: ApiService,
@@ -78,7 +79,7 @@ export class NewProductComponent implements OnInit {
         for (let i = 0; i < fileCount; i++) {
             formData.append('photos', inputEl.files.item(i));
         }
-        this.http.post('http://localhost:3000/products', formData)
+        this.http.post(this.baseUrl +'/products', formData)
         .subscribe(data => {
           form.reset();
           this.loading = false;
