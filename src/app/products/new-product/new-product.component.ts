@@ -53,28 +53,11 @@ export class NewProductComponent implements OnInit {
       });
   }
 
-    upload() {
-        console.log('hello')
-        let inputEl: HTMLInputElement = this.inputEl.nativeElement;
-        let fileCount: number = inputEl.files.length;
-        let formData = new FormData();
-        if (fileCount > 0) { // a file was selected
-            for (let i = 0; i < fileCount; i++) {
-                formData.append('photos', inputEl.files.item(i));
-            }
-            console.log(formData)
-            this.http
-                .post('http://localhost:3000/products', formData).subscribe()
-                // do whatever you do...
-                // subscribe to observable to listen for response
-        }
-    }
-  
+ 
 
   onSubmit(form: NgForm) {
     this.loading = true;
-    const formValues = Object.assign({}, form.value);
-    //let filesUpload = (<HTMLInputElement>document.getElementById('file')).files[0]
+    const formValues = Object.assign({}, form.value);  
     const product = {
       name: `${formValues.name}`,
       description: `${formValues.description}`,
@@ -82,11 +65,32 @@ export class NewProductComponent implements OnInit {
       stock: formValues.stock,
       category: formValues.category
     };
-    this.api.post('products', product)
+    let inputEl: HTMLInputElement = this.inputEl.nativeElement;
+    console.log(inputEl)
+    let fileCount: number = inputEl.files.length;
+    let formData = new FormData();
+    formData.append('name', product.name)
+    formData.append('description', product.description)
+    formData.append('price', product.price)
+    formData.append('stock', product.stock)
+    formData.append('category', product.category)
+    if (fileCount > 0) { // a file was selected
+        for (let i = 0; i < fileCount; i++) {
+            formData.append('photos', inputEl.files.item(i));
+        }
+        this.http.post('http://localhost:3000/products', formData)
+        .subscribe(data => {
+          form.reset();
+          this.loading = false;
+          this.newProduct = data;
+        });
+    }
+    
+    /* this.api.post('products', product)
       .subscribe(data => {
         form.reset();
         this.loading = false;
         this.newProduct = data;
-      });
+      }); */
   }
 }

@@ -66,7 +66,6 @@ export class ApiService {
 
   request(url: string, method: RequestMethod, body?: Object) {
     const headers = new Headers();
-    headers.append('Content-Type', 'multipart/form-data');
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', `Bearer ${this.auth.token}`);
 
