@@ -17,7 +17,6 @@ import { AppService, ApiService } from "./app.service";
 /*****Componentes ******/
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
-import { StoreComponent } from './store/store.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CartDetailComponent } from './cart/cart-detail/cart-detail.component';
 import { CartCheckoutComponent } from './cart/cart-checkout/cart-checkout.component';
@@ -31,13 +30,13 @@ import {AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ChatComponent } from './chat/chat.component';
-
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { ProductsComponent } from './products/products.component';
 import { NewProductComponent } from './products/new-product/new-product.component';
-import { AddCategoriesComponent } from './products/add-categories/add-categories.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { OrdersComponent } from './orders/orders.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { AddCategoryComponent } from './categories/add-category/add-category.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCsEgj7wbxqPO2CO68fYVFcYephX0w3qtE",
@@ -54,7 +53,6 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     AuthComponent,
-    StoreComponent,
     NavBarComponent,
     CartComponent,
     CartDetailComponent,
@@ -66,9 +64,10 @@ export const firebaseConfig = {
     ChatComponent,
     ProductsComponent,
     NewProductComponent,
-    AddCategoriesComponent,
     ProductDetailComponent,
     OrdersComponent,
+    CategoriesComponent,
+    AddCategoryComponent,
   ],
   imports: [
     BrowserModule,

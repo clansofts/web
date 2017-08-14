@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {NgForm } from '@angular/forms';
 //import { Product } from './../../shared/product.model';
 import { ApiService } from './../../app.service';
-import { AngularFireDatabase} from 'angularfire2/database';
 import { Observable } from 'rxjs';
-import * as firebase from 'firebase';
+import { Category } from './../../shared/category.model';
+
+
 
 @Component({
   selector: 'app-new-product',
@@ -14,54 +15,78 @@ import * as firebase from 'firebase';
   styleUrls: ['./new-product.component.css']
 })
 export class NewProductComponent implements OnInit {
- 
+   @Input() multiple: boolean = false;
+   @ViewChild('fileInput') inputEl: ElementRef;
+
+  categories: Category[];
   loading: Boolean = false;
   newProduct;
-  folder: string = 'img';
+  
 
   constructor(
     public api: ApiService,
-    public db: AngularFireDatabase, 
+    private http: Http,
   ) { }
 
   ngOnInit() {
+    this.api.get('categories')
+      .subscribe(data => {
+        this.categories = data
+        /* var indexed_nodes = {}, tree_roots = [];
+        for (var k
+           = 0; k < data.length; k += 1) {
+            data[k].children = [];            
+        }
+        for (var i = 0; i < data.length; i += 1) {
+            indexed_nodes[data[i]._id] = data[i];
+            
+        }
+        for (var j = 0; j < data.length; j += 1) {
+            var parent = data[j].parent;
+            if (parent === undefined) {
+                tree_roots.push(data[j]);
+            } else {
+                indexed_nodes[parent].children.push(data[j]);
+            }
+        }
+        console.log(JSON.stringify(tree_roots, undefined, "\t"));*/
+      });
   }
+
+    upload() {
+        console.log('hello')
+        let inputEl: HTMLInputElement = this.inputEl.nativeElement;
+        let fileCount: number = inputEl.files.length;
+        let formData = new FormData();
+        if (fileCount > 0) { // a file was selected
+            for (let i = 0; i < fileCount; i++) {
+                formData.append('photos', inputEl.files.item(i));
+            }
+            console.log(formData)
+            this.http
+                .post('http://localhost:3000/products', formData).subscribe()
+                // do whatever you do...
+                // subscribe to observable to listen for response
+        }
+    }
+  
 
   onSubmit(form: NgForm) {
     this.loading = true;
-
     const formValues = Object.assign({}, form.value);
-    let storageRef = firebase.storage().ref();
-        let success = false;
-        // This currently only grabs item 0, TODO refactor it to grab them all
-        for (let selectedFile of [(<HTMLInputElement>document.getElementById('file')).files[0]]) {
-            let folder = this.folder;
-            let path = `/${this.folder}/${selectedFile.name}`;
-            var iRef = storageRef.child(path);
-            iRef.put(selectedFile).then((snapshot) => {
-                //console.log('Uploaded', snapshot.totalBytes, 'bytes.');
-                //console.log(snapshot.metadata);
-                var url = snapshot.downloadURL;
-                //console.log('Uploaded a blob or file! Now storing the reference at',`/${this.folder}/`);
-                //db.list(`/${folder}/`).push({ path: path, filename: selectedFile.name })
-                //console.log('File available at', url);
-                  const product = {
-                    name: `${formValues.name}`,
-                    description: `${formValues.description}`,
-                    price: formValues.price,
-                    stock: formValues.stock,
-                    picture: url
-                  };
-                  this.api.post('products', product)
-                    .subscribe(data => {
-                      form.reset();
-                      this.loading = false;
-                      this.newProduct = data;
-                    });
-
-            });
-            
-        }
+    //let filesUpload = (<HTMLInputElement>document.getElementById('file')).files[0]
+    const product = {
+      name: `${formValues.name}`,
+      description: `${formValues.description}`,
+      price: formValues.price,
+      stock: formValues.stock,
+      category: formValues.category
+    };
+    this.api.post('products', product)
+      .subscribe(data => {
+        form.reset();
+        this.loading = false;
+        this.newProduct = data;
+      });
   }
-
 }

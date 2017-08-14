@@ -1,0 +1,8 @@
+<form (ngSubmit)="enviarOrden()" #paymentForm="ngForm" >
+  <div class="form-group">
+    <label for="paymentMethods">Categoria</label>
+    <select class="form-control"  id="paymentMethods">
+      <option *ngFor="let category of categories" [value]="category._id">{{category.name}}</option>
+    </select>
+  </div>
+</form>

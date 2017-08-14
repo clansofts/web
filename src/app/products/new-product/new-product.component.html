@@ -1,19 +1,81 @@
-<!-- <div class="col-sm-6">
-  <h1>New Product</h1>
-  <form #form="ngForm" (ngSubmit)="addProduct(form.value)">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Nombre de Producto</label>
-    <input type="text" name="title" [(ngModel)]="title" class="form-control" id="exampleInputEmail1" placeholder="Nombre de Producto">
-    <label for="exampleInputEmail1">Descripcion de Producto</label>
-    <textarea rows="3" name="description" [(ngModel)]="description" class="form-control" id="exampleInputEmail1" placeholder="Nombre de Producto"></textarea>
+
+
+<div class="row">
+  <div class="page-header">
+    <h1>New Product <button type="button" (click)="onSubmit(productForm)"  class="btn btn-success pull-right">Continuar</button></h1> 
 
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+  <form  #productForm="ngForm" [class.loading]="loading">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Info Product</h3>
+      </div>
+      <div class="panel-body">
+        
+          <div class="form-group">
+            <label>Nombre del Producto</label>
+            <input type="text" class="form-control" placeholder="Product Name" name="name" ngModel>
+          </div>
+          <div class="form-group">
+            <label>Descripcion</label>
+            <textarea  class="form-control" rows="3" placeholder="Describe el producto" name="description" ngModel></textarea>
+          </div>
+          <div class="form-group">
+            <label for="category">Categoria</label>
+            <select class="form-control" name="category" id="category" ngModel >
+              <option *ngFor="let category of categories" [value]="category._id">{{category.name}}</option>
+            </select>
+          </div>
+
+        
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Images Product <a href="" class="pull-right">Upload images</a></h3> 
+      </div>
+      <div class="panel-body">
+<!--           <input type="file" name="photos" multiple (change)="fileChange($event)" accept="image/*" > 
+ -->          <input type="file" multiple="multiple" #fileInput> 
+              <button (click)="upload()">send</button>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Pricing</h3> 
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label>Precio</label>
+          <input type="text" class="form-control"  placeholder="Precio" name="price" ngModel/>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Inventory</h3> 
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label>Inventario</label>
+          <input type="text" class="form-control" placeholder="Cantida disponible" name="stock" ngModel>
+        </div>         
+      </div>
+    </div>
+  </div>
+  </form>  
 </div>
-<div class="col-sm-6">
-  Result
-</div> -->
+
 <div class="add-form-container">
   <div class="ui icon message" *ngIf="newProduct">
     <i class="notched check green icon"></i>
@@ -25,31 +87,4 @@
       <p>Name: {{newProduct.name}}</p>
     </div>
   </div>
-  <form class="ui big form" #productForm="ngForm" (submit)="onSubmit(productForm)" [class.loading]="loading">
-    <div class="fields">
-      <div class="eight wide field">
-        <label>Nombre del Producto</label>
-        <input type="text" placeholder="Product Name" name="name" ngModel>
-      </div>
-      <div class="eight wide field">
-        <label>Descripcion</label>
-        <textarea placeholder="Describe el producto" name="description" ngModel></textarea>
-      </div>
-      <div class="eight wide field">
-        <label>Precio</label>
-        <input type="text" placeholder="Precio" name="price" ngModel/>
-      </div>
-      <div class="eight wide field">
-        <label>Inventario</label>
-        <input type="text" placeholder="Cantida disponible" name="stock" ngModel>
-      </div>
-    </div>
-    <div class="field">
-      <label>Photo URL</label>
-       <input id="file" name="file" type="file" >
-    </div>
-    <button type="submit" class="ui submit large grey button right floated">Submit</button>
-  </form>
 </div>
-
-
