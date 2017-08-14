@@ -64,7 +64,7 @@ export class NewProductComponent implements OnInit {
       description: `${formValues.description}`,
       price: formValues.price,
       stock: formValues.stock,
-      category: formValues.category
+      //category: formValues.category
     };
     let inputEl: HTMLInputElement = this.inputEl.nativeElement;
     console.log(inputEl)
@@ -74,7 +74,7 @@ export class NewProductComponent implements OnInit {
     formData.append('description', product.description)
     formData.append('price', product.price)
     formData.append('stock', product.stock)
-    formData.append('category', product.category)
+    //formData.append('category', product.category)
     if (fileCount > 0) { // a file was selected
         for (let i = 0; i < fileCount; i++) {
             formData.append('photos', inputEl.files.item(i));
