@@ -32,7 +32,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ChatComponent } from './chat/chat.component';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { ProductsComponent } from './products/products.component';
-import { NewProductComponent } from './products/new-product/new-product.component';
+import { AddProductComponent } from './products/add-product/add-product.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { OrdersComponent } from './orders/orders.component';
 import { CategoriesComponent } from './categories/categories.component';
@@ -63,7 +63,7 @@ export const firebaseConfig = {
     MapsComponent,
     ChatComponent,
     ProductsComponent,
-    NewProductComponent,
+    AddProductComponent,
     ProductDetailComponent,
     OrdersComponent,
     CategoriesComponent,

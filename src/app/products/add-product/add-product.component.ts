@@ -11,11 +11,11 @@ import { environment } from './../../../environments/environment';
 
 
 @Component({
-  selector: 'app-new-product',
-  templateUrl: './new-product.component.html',
-  styleUrls: ['./new-product.component.css']
+  selector: 'app-add-product',
+  templateUrl: './add-product.component.html',
+  styleUrls: ['./add-product.component.css']
 })
-export class NewProductComponent implements OnInit {
+export class AddProductComponent implements OnInit {
    @Input() multiple: boolean = false;
    @ViewChild('fileInput') inputEl: ElementRef;
 
@@ -64,7 +64,7 @@ export class NewProductComponent implements OnInit {
       description: `${formValues.description}`,
       price: formValues.price,
       stock: formValues.stock,
-      //category: formValues.category
+      category: formValues.category
     };
     let inputEl: HTMLInputElement = this.inputEl.nativeElement;
     console.log(inputEl)
