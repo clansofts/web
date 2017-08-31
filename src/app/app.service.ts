@@ -8,6 +8,7 @@ import 'rxjs/add/observable/of';
 import { Product } from "./model/product.model";
 import { environment } from './../environments/environment';
 import { AuthService } from './auth/auth.service';
+import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()
@@ -15,6 +16,7 @@ export class AppService {
 
   baseUrl = environment.apiUrl;
   productsList: Product[];
+  private subject = new Subject<any>();
 
   constructor(
     private http:Http,
@@ -22,12 +24,18 @@ export class AppService {
    	this.http.request(this.baseUrl + '/products')
 			.subscribe((response:Response)=>{
         this.productsList = response.json();
+        this.subject.next(this.productsList);
 			}) 
   }
 
+  getProduct(): Observable<any> {
+    return this.subject.asObservable();
+  }
+  
   getProducts(name: string): Observable<Product[]> { 
-    return Observable.of(this.filterProducts(name)); 
-  } 
+    this.subject.next(this.filterProducts(name))
+    return Observable.of(this.filterProducts(name));
+  }
 
   getProductNames(name: string): Observable<string[]> { 
     return Observable.of(this.filterProducts(name) 
@@ -102,3 +110,26 @@ export class ApiService {
 
 }
 
+
+/* 
+@Injectable()
+export class MessageService {
+    private subject = new Subject<any>();
+
+    sendMessage(message: string) {
+      console.log('1');
+      this.subject.next({ text: message });
+    }
+
+    clearMessage() {
+      console.log('2');
+      this.subject.next();
+    }
+
+    getMessage(): Observable<any> {
+      console.log('3');
+      return this.subject.asObservable();
+    }
+}
+
+ */

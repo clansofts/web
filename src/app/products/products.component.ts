@@ -1,24 +1,30 @@
 
-import { Component, OnInit, Input } from '@angular/core';
-import { ApiService } from './../app.service';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { ApiService, AppService } from './../app.service';
 import { Product } from './../shared/product.model';
 import { CartService } from "./../cart/cart.service";
-
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[];
   selectedProduct: Product; 
-  @Input('master') masterName: string;
-  
+  message: any;
+  subscription: Subscription;
   constructor(
     public api: ApiService,
     private cart: CartService,
-    ) { }
+    private appService: AppService,    
+    ) { 
+      this.subscription = this.appService.getProduct().subscribe( message => { 
+        this.message = message; 
+      })    
+      
+    }
   ngOnInit() {
     this.getProducts();
   }
@@ -37,5 +43,11 @@ export class ProductsComponent implements OnInit {
   addProductToCart(product: Product) {
     this.cart.addLine(product);
   }
+
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
+  }
+
 
 }

@@ -7,17 +7,16 @@
       <p class="navbar-text">Play eCommerce</p>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-left" role="search">
+      <div class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <input type="text"  #searchInput class="form-control" placeholder="Search">
+          <input type="text"  #searchInput class="form-control" placeholder="Search" [(ngModel)]="searchInputTerm">
         </div>
-        <button type="submit" class="btn btn-primary">Search</button>
-              <ul> 
-              <li *ngFor="let productName of productNames"> 
-              {{productName}} 
-        </li> 
-            </ul> 
-      </form>
+        <button (click)="searchProducts()"class="btn btn-primary">Search</button>
+        <ul #suggestions [style.display]="productNames.length > 0 ? 'block' : 'none'">
+            <li *ngFor="let productName of productNames">{{productName}}</li>
+          </ul>      
+        
+        </div>
       <ul class="nav navbar-nav navbar-right">
         <li><a><app-cart></app-cart></a></li>
         <li *ngIf="!auth.isAuthenticated"><a routerLink="login">Iniciar Sesión</a></li>
