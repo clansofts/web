@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core'; 
+import { Component, OnInit, ViewChild, } from '@angular/core'; 
 import { AppService } from './../app.service';
 import { AuthService } from './../auth/auth.service';
 import { Observable } from 'rxjs/Observable'; 
@@ -19,8 +19,6 @@ export class NavBarComponent implements OnInit {
   @ViewChild('suggestions') suggestions; 
   productNames: Array<string> = []; 
   searchInputTerm: string = ''; 
-
-  @Output() search = new EventEmitter<string>(); 
   
   constructor(
     private appService : AppService,
@@ -31,36 +29,21 @@ export class NavBarComponent implements OnInit {
     Observable.fromEvent(this.searchInput.nativeElement, 'keyup') 
       .debounceTime(400) 
       .distinctUntilChanged() 
-      .map((event: KeyboardEvent) =>  
-                          (<HTMLInputElement>event.target).value) 
-      .switchMap(title =>  
-                      this.appService.getProductNames(title)) 
+      .map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value) 
+      .switchMap(title => this.appService.getProductNames(title)) 
       .subscribe(productNames => this.productNames = productNames); 
 
     Observable.fromEvent(this.suggestions.nativeElement, 'click') 
-      .map((event: KeyboardEvent) =>  
-                  (<HTMLInputElement>event.srcElement).innerText) 
+      .map((event: KeyboardEvent) => (<HTMLInputElement>event.srcElement).innerText) 
       .subscribe(res => { 
         this.searchInputTerm = res; 
+        this.appService.getProducts(this.searchInputTerm);
         this.productNames = []; 
       }); 
   } 
 
   searchProducts() { 
-    this.productNames = []; 
-    this.search.emit(this.searchInputTerm);
     this.appService.getProducts(this.searchInputTerm);
-    console.log('aun estoy en nav ' + this.searchInputTerm);
   } 
-  
- /*  sendMessage(): void {
-    // send message to subscribers via observable subject
-    this.messageService.sendMessage('Message from Home Component to App Component!');
-  }
 
-  clearMessage(): void {
-      // clear message
-      this.messageService.clearMessage();
-  }
- */
 }

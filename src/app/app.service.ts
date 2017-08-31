@@ -19,7 +19,7 @@ export class AppService {
   private subject = new Subject<any>();
 
   constructor(
-    private http:Http,
+    private http: Http,
   ) { 
    	this.http.request(this.baseUrl + '/products')
 			.subscribe((response:Response)=>{
@@ -109,27 +109,3 @@ export class ApiService {
   }
 
 }
-
-
-/* 
-@Injectable()
-export class MessageService {
-    private subject = new Subject<any>();
-
-    sendMessage(message: string) {
-      console.log('1');
-      this.subject.next({ text: message });
-    }
-
-    clearMessage() {
-      console.log('2');
-      this.subject.next();
-    }
-
-    getMessage(): Observable<any> {
-      console.log('3');
-      return this.subject.asObservable();
-    }
-}
-
- */
