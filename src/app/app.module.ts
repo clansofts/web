@@ -4,11 +4,10 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule }   from '@angular/router';
+//import { RouterModule }   from '@angular/router';
 import { CartModule } from './cart/cart.module';
-import { AuthModule } from './auth/auth.module';
 /*****Rutas******/
-import { AppRoutes } from './app.routes';
+import { routing } from './app.routes';
 /*****Servicios******/
 import { CartService } from "./cart/cart.service";
 import { ChatService } from "./chat/chat.service";
@@ -37,6 +36,7 @@ import { ProductDetailComponent } from './products/product-detail/product-detail
 import { OrdersComponent } from './orders/orders.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { AddCategoryComponent } from './categories/add-category/add-category.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCsEgj7wbxqPO2CO68fYVFcYephX0w3qtE",
@@ -68,6 +68,7 @@ export const firebaseConfig = {
     OrdersComponent,
     CategoriesComponent,
     AddCategoryComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,8 +77,7 @@ export const firebaseConfig = {
     FormsModule,
     ReactiveFormsModule,
     CartModule,
-    AuthModule,
-    RouterModule.forRoot(AppRoutes),
+    routing,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule
