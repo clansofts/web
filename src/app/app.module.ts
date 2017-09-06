@@ -37,6 +37,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { AddCategoryComponent } from './categories/add-category/add-category.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PhoneLoginComponent } from './auth/phone-login/phone-login.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCsEgj7wbxqPO2CO68fYVFcYephX0w3qtE",
@@ -69,6 +70,7 @@ export const firebaseConfig = {
     CategoriesComponent,
     AddCategoryComponent,
     PageNotFoundComponent,
+    PhoneLoginComponent,
   ],
   imports: [
     BrowserModule,
