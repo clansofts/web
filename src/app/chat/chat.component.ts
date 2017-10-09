@@ -26,7 +26,11 @@ export class ChatComponent {
       
     });
     this._chatService.on('user.hugged', (username) => {
-      console.log(username + 'just hugged you.')
+      var mensaje = username + ' te ha envido un abrazo';
+      const message = {
+      text: mensaje
+    };
+      this.messages.push(message);
     });
     this._chatService.getUsers()
       .subscribe((usersOnline: any[]) => {
@@ -43,8 +47,10 @@ export class ChatComponent {
     this.messageText = ''
   }
   sendHug(id){
+    console.log(id);
     this._chatService.emit('user.hug', id);
   }
+
   ngOnDestroy() {
     this._chatService.removeListener('disconnect');
   }

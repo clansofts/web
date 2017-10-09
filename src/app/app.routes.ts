@@ -12,7 +12,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 
 import { AuthRoutes } from './auth/auth.routes';
-import { ProductsRoutes } from './products/products.routes'
+import { ProductsRoutes } from './products/products.routes';
+import { ChatRoutes } from './chat/chat.routes';
 
 
 export const AppRoutes: Routes = [
@@ -23,6 +24,7 @@ export const AppRoutes: Routes = [
     }, */
     ...AuthRoutes,
     ...ProductsRoutes,
+    ...ChatRoutes,
     { path: '**', component: PageNotFoundComponent }
 
 ];

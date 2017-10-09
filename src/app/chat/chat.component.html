@@ -5,7 +5,7 @@
         Usuarios Conectados
       </a>
       <a class="list-group-item" *ngFor="let userOnline of usersOnline">
-        <span>{{userOnline.name}}</span>
+        <span>{{userOnline.name}}</span><button class="btn btn-success btn-xs pull-right" (click)="sendHug(userOnline.id)">Enviar abrazo</button>
       </a>
     </div>
   </div>
