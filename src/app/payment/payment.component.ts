@@ -8,7 +8,7 @@ declare let paypal: any;
 })
 export class PaymentComponent implements OnInit, AfterViewChecked {
   private didPaypalScriptLoad: boolean = false;
-  private loading: boolean = true;
+  public loading: boolean = true;
 
   private paypalConfig: any = {
     env: 'sandbox',
